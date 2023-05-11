@@ -2,24 +2,58 @@ import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-n
 import React from 'react'
 
 export default function PokemonCards(props) {
-  const {pokemon} = props;
+    const { pokemon } = props;
 
-  const goToPokemon = () => {
-    console.log('Vamos al pokemon: ',pokemon.name);
-    console.log(pokemon);
-  }
-  return (
-    <TouchableWithoutFeedback onPress={goToPokemon}>
-      <View style={styles.card}>
-        <Text>PokemonCard</Text>
-      </View>
-    </TouchableWithoutFeedback>
-  )
+    const goToPokemon = () => {
+        console.log('Vamos al pokemon: ', pokemon.name);
+        console.log(pokemon);
+    }
+    return (
+        <TouchableWithoutFeedback onPress={goToPokemon}>
+            <View style={styles.card}>
+                <View style={styles.spacing}>
+                    <View style={styles.bgStyles}>
+                        <Text style={styles.number}>
+                            #{`${pokemon.id}`.padStart(2,0)}
+                        </Text>
+                        <Text style={styles.name}>{pokemon.name}</Text>
+                        <Image source={{ uri: pokemon.image }} style={styles.images} />
+                    </View>
+                </View>
+            </View>
+        </TouchableWithoutFeedback>
+    )
 }
 
 const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    height: 130
-  }
+    card: {
+        flex: 1,
+        height: 130
+    },
+    spacing: {
+        flex: 1,
+        padding: 5
+    },
+    name: {
+        color: '#343434',
+        fontSize: 15,
+        fontWeight: "bold",
+        paddingTop: 15
+
+    },
+    bgStyles: {
+        backgroundColor: 'grey'
+    },
+    images: {
+        position: 'absolute',
+        bottom: 2,
+        right: 2,
+        width: 90,
+    },
+    number: {
+        position: "absolute",
+        right: 10,
+        top: 10,
+        fontSize: 12
+    }
 })

@@ -39,7 +39,7 @@ export default function PokedexScreen() {
 
   return (
     <SafeAreaView>
-      <Text>PokedexScreen</Text>
+      {/*<Text>PokedexScreen</Text>*/}
       <PokemonList pokemons={pokemons}></PokemonList>
     </SafeAreaView>
   )
