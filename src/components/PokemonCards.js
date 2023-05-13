@@ -1,9 +1,13 @@
 import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
+import getColorByPokemonType from '../utils/getColorByPokemon'
+import { capitalize } from 'lodash'
 
 export default function PokemonCards(props) {
     const { pokemon } = props;
-
+    console.log(pokemon);
+    const pokemonColor = getColorByPokemonType(pokemon.type);
+    const bgStyles = { backgroundColor: pokemonColor, ...styles.bgStyle };
     const goToPokemon = () => {
         console.log('Vamos al pokemon: ', pokemon.name);
         console.log(pokemon);
@@ -12,12 +16,15 @@ export default function PokemonCards(props) {
         <TouchableWithoutFeedback onPress={goToPokemon}>
             <View style={styles.card}>
                 <View style={styles.spacing}>
-                    <View style={styles.bgStyles}>
+                    <View style={bgStyles}>
                         <Text style={styles.number}>
-                            #{`${pokemon.id}`.padStart(2,0)}
+                            #{`${pokemon.id}`.padStart(2, 0)}
                         </Text>
-                        <Text style={styles.name}>{pokemon.name}</Text>
-                        <Image source={{ uri: pokemon.image }} style={styles.images} />
+                        <View style={{ flex: 0, paddingRight: 10 }}>
+                            <Image style={styles.image} source={{ uri: pokemon.image }} />
+                        </View>
+                        <Text style={styles.name}> {pokemon.name}</Text>
+                        <Text style={styles.name}> {pokemon.type}</Text>
                     </View>
                 </View>
             </View>
@@ -28,32 +35,39 @@ export default function PokemonCards(props) {
 const styles = StyleSheet.create({
     card: {
         flex: 1,
-        height: 130
+        height: 130,
+        paddingBottom: 20,
     },
     spacing: {
         flex: 1,
-        padding: 5
+        padding: 5,
+    },
+    bgStyle: {
+        //backgroundColor: 'grey',
+        borderRadius: 10,
+        height: 120
+    },
+    number: {
+        position: 'absolute',
+        right: 10,
+        top: 10,
+        color: '#fff',
+        fontSize: 11,
     },
     name: {
-        color: '#343434',
+        color: '#fff',
+        fontWeight: 'bold',
         fontSize: 15,
-        fontWeight: "bold",
-        paddingTop: 15
-
+        paddingTop: 10,
     },
-    bgStyles: {
-        backgroundColor: 'grey'
-    },
-    images: {
+    image: {
         position: 'absolute',
+        top: 30,
         bottom: 2,
         right: 2,
         width: 90,
+        height: 90,
+        borderRadius: 5,
     },
-    number: {
-        position: "absolute",
-        right: 10,
-        top: 10,
-        fontSize: 12
-    }
-})
+});
+
