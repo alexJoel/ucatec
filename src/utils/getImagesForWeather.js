@@ -1,0 +1,40 @@
+/* eslint-disable global-require */
+
+const images = {
+	Clear: require('../../assets/clear.jpeg'),
+	Hail: require('../../assets/light-rain.jpeg'),
+	'Heavy Cloud': require('../../assets/heavy-cloud.png'),
+	'Light Cloud': require('../../assets/light-cloud.png'),
+	'Heavy Rain': require('../../assets/light-rain.jpeg'),
+	'Light Rain': require('../../assets/light-rain.jpeg'),
+	1001 /*Showers*/: require('../../assets/showers.jpeg'),
+	Sleet: require('../../assets/snow.jpeg'),
+	Snow: require('../../assets/snow.jpeg'),
+	Thunder: require('../../assets/thunder.png'),
+    0: "Unknown",
+    1000: require('../../assets/clear.jpeg'),
+    1100: require('../../assets/clear.jpeg'),
+    1101: require('../../assets/heavy-cloud.png'),
+    1102: require('../../assets/light-cloud.png'),
+    1001: require('../../assets/light-cloud.png'),
+    2000: require('../../assets/heavy-cloud.png'),
+    2100: require('../../assets/heavy-cloud.png'),
+    4000: require('../../assets/light-rain.jpeg'),
+    4001: require('../../assets/light-cloud.png'),
+    4200: require('../../assets/light-cloud.png'),
+    4201: require('../../assets/thunder.png'),
+    5000: require('../../assets/snow.jpeg'),
+    5001: require('../../assets/snow.jpeg'),
+    5100: require('../../assets/snow.jpeg'),
+    5101: require('../../assets/snow.jpeg'),
+    6000: require('../../assets/snow.jpeg'),
+    6001: require('../../assets/snow.jpeg'),
+    6200: require('../../assets/snow.jpeg'),
+    6201: require('../../assets/snow.jpeg'),
+    7000: require('../../assets/snow.jpeg'),
+    7101: require('../../assets/snow.jpeg'),
+    7102: require('../../assets/snow.jpeg'),
+    8000: require('../../assets/thunder.png'), //"Thunderstorm"
+};
+
+export default weather => images[weather|1001];
