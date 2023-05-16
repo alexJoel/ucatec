@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	StyleSheet,
 	KeyboardAvoidingView,
@@ -25,25 +25,29 @@ export default class App extends React.Component {
 	};
 
 	componentDidMount() {
-		this.handleUpdateLocation('toronto');
+		this.handleUpdateLocation('Bolivia');
 	}
 
 	handleUpdateLocation = async city => {
 		if (!city) return;
-        console.log(city);
+        //console.log(city);
 		this.setState({ loading: true }, async () => {
 			try {
-				
                 const dataGet =  await fetchLocationId(city);
-                console.log('dataGet: ',dataGet);
+                console.log('dataValues: ',dataGet.data.values);
+                console.log('location: ',dataGet.location);
 				this.setState({
 					loading: false,
 					error: false,
 					name: dataGet.location.name,
-					weatherCode: dataGet.data.values?.weatherCode | 1001,
-					temperature: dataGet.data.values?.temperature,
+					weatherCode: dataGet.data.values.weatherCode,
+					temperature: dataGet.data.values.temperature,
 					humidity: dataGet.data.values?.humidity,
-					windSpeed: dataGet.data.values?.windSpeed
+					windSpeed: dataGet.data.values?.windSpeed,
+                    uvIndex: dataGet.data.values?.uvIndex,
+                    windDirection: dataGet.data.values?.windDirection,
+                    lat: dataGet.location.lat,
+                    long: dataGet.location.lon
 				});
 			} catch (e) {
                 console.log(e);
@@ -63,7 +67,11 @@ export default class App extends React.Component {
 			weatherCode,
 			temperature,
 			humidity,
-			windSpeed
+			windSpeed,
+            uvIndex,
+            windDirection,
+            lat,
+            long
 		} = this.state;
         console.log('this.state: ',this.state);
 		return (
@@ -75,19 +83,23 @@ export default class App extends React.Component {
 					imageStyle={styles.image}
 				>
 					<SearchInput
-						placeholder="Select a City"
+						placeholder="Ingresa una ciudad/país"
 						onSubmit={this.handleUpdateLocation}
 					/>
 					<View style={styles.cards}>
-						<View backgroundColor="#ffffff">
+						<View style={styles.cardContent}>
 							<WeatherText
-								location={name}
+								name={name}
 								loading={loading}
 								weather={weatherCode}
 								temperature={temperature}
 								humidity={humidity}
 								error={error}
 								windSpeed={windSpeed}
+                                uvIndex={uvIndex}
+                                windDirection= {windDirection}
+                                lat={lat}
+                                long={long}
 							/>
 						</View>
 					</View>
@@ -113,5 +125,13 @@ const styles = StyleSheet.create({
 	},
 	cards: {
 		flex: 2
-	}
+	},
+    cardContent: {
+        backgroundColor: "#ffffff61",
+        border: 'solid',
+        borderColor: '#488930a8',
+        borderRadius: 20,
+        margin: 10,
+        padding: 10
+    }
 });

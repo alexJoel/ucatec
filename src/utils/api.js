@@ -1,6 +1,7 @@
 export const fetchLocationId = async city => {
 	const response = await fetch(
 		`https://api.tomorrow.io/v4/weather/realtime?location=${city}&apikey=7T8ckCGxh4GXZE7smT3cv2k4brUdYFRY`
+		//`https://api.tomorrow.io/v4/weather/realtime?location=${city}&apikey=3j8HeZUvLBIC7G4SUUITpbKJXvM04Rzb`
 	);
 	const locations = await response.json();
 	return locations;
